@@ -1,0 +1,34 @@
+<div class="card p-4 shadow-sm mx-auto" style="max-width: 500px;">
+  <h3 class="text-center mb-4">Registro de Usuario</h3>
+
+  <form [formGroup]="registroForm" (ngSubmit)="onSubmit()">
+    <div class="mb-3">
+      <label for="nombre" class="form-label">Nombre</label>
+      <input type="text" id="nombre" formControlName="nombre" class="form-control" />
+      <div class="text-danger small" *ngIf="registroForm.get('nombre')?.touched && registroForm.get('nombre')?.invalid">
+        El nombre es obligatorio.
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="email" class="form-label">Correo electrónico</label>
+      <input type="email" id="email" formControlName="email" class="form-control" />
+      <div class="text-danger small" *ngIf="registroForm.get('email')?.touched && registroForm.get('email')?.invalid">
+        <div *ngIf="registroForm.get('email')?.errors?.['required']">El correo es obligatorio.</div>
+        <div *ngIf="registroForm.get('email')?.errors?.['email']">Formato no válido.</div>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="password" class="form-label">Contraseña</label>
+      <input type="password" id="password" formControlName="password" class="form-control" />
+      <div class="text-danger small" *ngIf="registroForm.get('password')?.touched && registroForm.get('password')?.invalid">
+        <div *ngIf="registroForm.get('password')?.errors?.['required']">La contraseña es obligatoria.</div>
+        <div *ngIf="registroForm.get('password')?.errors?.['minlength']">Debe tener al menos 6 caracteres.</div>
+      </div>
+    </div>
+
+    <button class="btn btn-success w-100" type="submit" [disabled]="registroForm.invalid">Registrarse</button>
+  </form>
+</div>
+
