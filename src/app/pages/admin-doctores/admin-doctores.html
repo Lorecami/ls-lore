@@ -1,0 +1,21 @@
+<div class="admin-doctores">
+  <h2>Gestión de Doctores</h2>
+
+  <div *ngFor="let doctor of doctores$ | async" class="card">
+    <div *ngIf="editMode && currentDoctor.id === doctor.id">
+      <input [(ngModel)]="currentDoctor.name" placeholder="Nombre" />
+      <input [(ngModel)]="currentDoctor.email" placeholder="Email" />
+      <button (click)="guardarCambios()" class="btn btn-guardar">Guardar</button>
+      <button (click)="cancelarEdicion()" class="btn btn-cancelar">Cancelar</button>
+    </div>
+
+    <div *ngIf="!editMode || currentDoctor.id !== doctor.id">
+      <p><strong>Nombre:</strong> {{ doctor.name }}</p>
+      <p><strong>Email:</strong> {{ doctor.email }}</p>
+      <div class="acciones">
+        <button (click)="editar(doctor)" class="btn btn-editar">Editar</button>
+        <button (click)="eliminar(doctor.id)" class="btn btn-eliminar">Eliminar</button>
+      </div>
+    </div>
+  </div>
+</div>

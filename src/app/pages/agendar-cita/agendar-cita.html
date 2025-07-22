@@ -1,0 +1,39 @@
+<div class="agendar-container">
+  <h2>📅 Agendar Cita Médica</h2>
+
+  <!-- Mensajes -->
+  <div *ngIf="mensaje" class="alert success">{{ mensaje }}</div>
+  <div *ngIf="error" class="alert error">{{ error }}</div>
+
+  <!-- Selección de doctor -->
+  <div *ngIf="!doctorSeleccionado" class="card">
+    <h3>👨‍⚕️ Selecciona un Doctor:</h3>
+    <select [(ngModel)]="doctorSeleccionado">
+      <option [ngValue]="null">-- Elige un doctor --</option>
+      <option *ngFor="let d of doctores$ | async" [ngValue]="d">
+        {{ d.name || 'Doctor(a)' }}
+      </option>
+    </select>
+  </div>
+
+  <!-- Formulario de agendamiento -->
+  <div *ngIf="doctorSeleccionado" class="card">
+    <p><strong>Doctor seleccionado:</strong> {{ doctorSeleccionado.name }}</p>
+
+    <label>📆 Fecha:</label>
+    <input type="date" [(ngModel)]="fecha" />
+
+    <label>⏰ Hora:</label>
+    <select [(ngModel)]="hora">
+      <option [ngValue]="null">-- Selecciona hora --</option>
+      <option *ngFor="let h of horarios" [value]="h">{{ h }}</option>
+    </select>
+
+    <div class="actions">
+      <button class="btn primary" (click)="agendarTurno()">✅ Agendar</button>
+      <button class="btn secondary" (click)="cancelar()">Cancelar</button>
+    </div>
+  </div>
+</div>
+
+

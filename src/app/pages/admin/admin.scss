@@ -1,0 +1,48 @@
+.admin-container {
+  padding: 2rem;
+  font-family: 'Segoe UI', sans-serif;
+  color: #444;
+}
+
+h2 {
+  color: #d63384;
+  margin-bottom: 1rem;
+}
+
+.user-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #fff;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.user-table th,
+.user-table td {
+  border: 1px solid #ddd;
+  padding: 0.75rem;
+  text-align: left;
+}
+
+.user-table th {
+  background-color: #fce4ec;
+  color: #d63384;
+}
+
+button {
+  margin-right: 0.5rem;
+  background-color: #f06292;
+  color: white;
+  border: none;
+  padding: 0.4rem 0.8rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #ec407a;
+}
+
+select {
+  padding: 0.3rem;
+  border-radius: 4px;
+}

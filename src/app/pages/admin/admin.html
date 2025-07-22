@@ -1,0 +1,42 @@
+<div class="admin-container">
+  <h2>Panel de Administración</h2>
+
+  <table class="user-table">
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Email</th>
+        <th>Rol</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users$ | async">
+        <td>{{ user.name }}</td>
+        <td>{{ user.email }}</td>
+        <td>
+          <ng-container *ngIf="!editMode || currentUser.id !== user.id; else editRol">
+            {{ user.role }}
+          </ng-container>
+          <ng-template #editRol>
+            <select [(ngModel)]="currentUser.role">
+              <option value="paciente">Paciente</option>
+              <option value="doctor">Doctor</option>
+              <option value="admin">Administrador</option>
+            </select>
+          </ng-template>
+        </td>
+        <td>
+          <ng-container *ngIf="!editMode || currentUser.id !== user.id; else editAcciones">
+            <button (click)="editar(user)">Editar</button>
+            <button (click)="eliminar(user.id)">Eliminar</button>
+          </ng-container>
+          <ng-template #editAcciones>
+            <button (click)="guardarCambios()">Guardar</button>
+            <button (click)="cancelar()">Cancelar</button>
+          </ng-template>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,19 @@
+<nav>
+  <a routerLink="/" class="nav-item">Inicio</a>
+  <a *ngIf="!userRole" routerLink="/login" class="nav-item">Login</a>
+  <a *ngIf="!userRole" routerLink="/register" class="nav-item">Registrarse</a>
+
+  <a *ngIf="userRole === 'admin'" routerLink="/admin" class="nav-item">Admin</a>
+  <a *ngIf="userRole === 'admin'" routerLink="/admin-doctores" class="nav-item">Doctores</a>
+  <a *ngIf="userRole === 'admin'" routerLink="/admin-citas" class="nav-item">Ver Citas</a>
+
+  <a *ngIf="userRole === 'doctor'" routerLink="/doctor" class="nav-item">Panel Doctor</a>
+
+  <a *ngIf="userUid" routerLink="/perfil" class="nav-item">Perfil</a>
+  <a *ngIf="userRole === 'paciente'" routerLink="/agendar-cita" class="nav-item">Agendar Cita</a>
+  <a *ngIf="userRole === 'paciente'" routerLink="/mis-citas" class="nav-item">Mis Citas</a>
+
+  <a (click)="logout()" *ngIf="userUid" class="nav-item" style="cursor: pointer;">Cerrar sesión</a>
+</nav>
+
+<router-outlet></router-outlet>

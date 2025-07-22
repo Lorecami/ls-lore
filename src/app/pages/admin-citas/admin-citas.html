@@ -1,0 +1,8 @@
+<div class="admin-citas-container">
+  <h2>Gestión de Citas (Admin)</h2>
+
+  <button pButton type="button" label="Crear cita de prueba" (click)="generarCitaPrueba()"></button>
+
+  <div *ngIf="mensaje" class="msg success">{{ mensaje }}</div>
+  <div *ngIf="error" class="msg error">{{ error }}</div>
+</div>
