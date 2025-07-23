@@ -1,20 +1,23 @@
-<div class="login-container">
-  <h2>💗 Iniciar Sesión</h2>
+<div class="form-container">
+  <h2>Iniciar Sesión</h2>
 
-  <div *ngIf="error" class="alert error">{{ error }}</div>
+  <form (ngSubmit)="login()">
+    <div class="form-group">
+      <label for="email">Correo electrónico</label>
+      <input type="email" [(ngModel)]="email" name="email" required />
+    </div>
 
-  <form (ngSubmit)="login()" class="form-box">
-    <label>Email:</label>
-    <input type="email" [(ngModel)]="email" name="email" required />
+    <div class="form-group">
+      <label for="password">Contraseña</label>
+      <input type="password" [(ngModel)]="password" name="password" required />
+    </div>
 
-    <label>Contraseña:</label>
-    <input type="password" [(ngModel)]="password" name="password" required />
-
-    <button type="submit" class="btn pink">Ingresar</button>
+    <div class="form-actions">
+      <button type="submit" class="p-button p-component custom-button">
+        <span class="p-button-label">Entrar</span>
+      </button>
+    </div>
   </form>
 
-  <p class="center">
-    ¿No tienes cuenta?
-    <a routerLink="/register">Regístrate aquí</a>
-  </p>
+  <p class="error-msg" *ngIf="error">{{ error }}</p>
 </div>
