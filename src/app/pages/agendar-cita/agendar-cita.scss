@@ -1,93 +1,53 @@
-.agendar-container {
+.agendar-panel {
+  background: #fff0f5;
+  padding: 30px;
+  margin: 40px auto;
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(255, 105, 180, 0.2);
   max-width: 600px;
-  margin: 2rem auto;
-  padding: 2rem;
-  background: #ffffff;
-  border-radius: 16px;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-  font-family: 'Segoe UI', sans-serif;
+  text-align: center;
 
   h2 {
-    text-align: center;
-    margin-bottom: 1.5rem;
-    color: #333;
+    color: #e91e63;
+    font-size: 26px;
+    margin-bottom: 20px;
   }
 
-  .card {
-    background: #f9f9f9;
-    padding: 1.5rem;
-    border-radius: 12px;
-    margin-bottom: 1.5rem;
-    border: 1px solid #ddd;
+  .selector,
+  .formulario {
+    margin-bottom: 20px;
   }
 
-  label {
-    display: block;
-    margin: 1rem 0 0.3rem;
-    font-weight: 600;
-  }
-
-  input[type="date"],
-  select {
+  select,
+  input {
     width: 100%;
-    padding: 0.6rem;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    font-size: 1rem;
-    background-color: #fff;
+    padding: 8px;
+    margin-top: 8px;
+    border: 1px solid #ffb6c1;
+    border-radius: 5px;
   }
 
-  .actions {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 1.5rem;
+  .form-group {
+    margin: 15px 0;
+  }
 
-    .btn {
-      padding: 0.6rem 1.2rem;
-      border: none;
-      border-radius: 8px;
-      font-weight: bold;
-      cursor: pointer;
-      font-size: 1rem;
-      transition: all 0.3s ease;
+  .btn-agendar {
+    background-color: #e91e63;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
 
-      &.primary {
-        background-color: #4CAF50;
-        color: white;
-
-        &:hover {
-          background-color: #3e8e41;
-        }
-      }
-
-      &.secondary {
-        background-color: #bbb;
-        color: white;
-
-        &:hover {
-          background-color: #999;
-        }
-      }
+    &:hover {
+      background-color: #d81b60;
     }
   }
 
-  .alert {
-    padding: 0.8rem;
-    border-radius: 8px;
-    font-weight: 600;
-    margin-bottom: 1rem;
-    text-align: center;
-
-    &.success {
-      background-color: #d4edda;
-      color: #155724;
-      border: 1px solid #c3e6cb;
-    }
-
-    &.error {
-      background-color: #f8d7da;
-      color: #721c24;
-      border: 1px solid #f5c6cb;
-    }
+  .mensaje {
+    margin-top: 15px;
+    color: #444;
+    font-weight: bold;
   }
 }

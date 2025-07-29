@@ -1,8 +1,17 @@
 <div class="admin-citas-container">
-  <h2>Gestión de Citas (Admin)</h2>
+  <h2>📋 Gestión de Citas (Admin)</h2>
 
-  <button pButton type="button" label="Crear cita de prueba" (click)="generarCitaPrueba()"></button>
+  <ul *ngIf="citas$ | async as citas">
+    <li *ngFor="let cita of citas" class="admin-cita-item">
+      <strong>Doctor:</strong> {{ cita.doctorNombre || 'Sin nombre' }} <br />
+      <strong>Paciente:</strong> {{ cita.pacienteNombre || 'Sin nombre' }} <br />
+      <strong>Fecha:</strong> {{ cita.fecha }} <br />
+      <strong>Hora:</strong> {{ cita.hora }} <br />
+      <strong>Estado:</strong> {{ cita.estado }} <br />
+    </li>
+  </ul>
 
-  <div *ngIf="mensaje" class="msg success">{{ mensaje }}</div>
-  <div *ngIf="error" class="msg error">{{ error }}</div>
+  <div *ngIf="(citas$ | async)?.length === 0" class="msg no-citas">
+    No hay citas registradas.
+  </div>
 </div>

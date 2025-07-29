@@ -1,19 +1,23 @@
 <div class="doctor-panel">
-  <h2>Mis Citas</h2>
+  <h2>📅 Mis Citas Programadas</h2>
 
-  <div *ngFor="let cita of citas$ | async" class="card">
-    <p><strong>Paciente:</strong> {{ cita.userName || 'No disponible' }}</p>
-    <p><strong>Fecha:</strong> {{ cita.date }}</p>
-    <p><strong>Hora:</strong> {{ cita.time }}</p>
-    <p><strong>Estado:</strong> <span class="estado">{{ cita.estado }}</span></p>
+  <div *ngIf="loading()">Cargando citas...</div>
+  <div *ngIf="error()">{{ error() }}</div>
+  <div *ngIf="mensaje()" class="success-msg">{{ mensaje() }}</div>
 
-    <div class="acciones">
-      <button (click)="cambiarEstado(cita, 'confirmada')" class="btn btn-confirmar" *ngIf="cita.estado === 'pendiente'">
-        Confirmar
-      </button>
-      <button (click)="cambiarEstado(cita, 'cancelada')" class="btn btn-cancelar" *ngIf="cita.estado !== 'cancelada'">
-        Cancelar
-      </button>
-    </div>
+  <div *ngIf="citas$().length === 0 && !loading()">
+    <p>No tienes citas programadas.</p>
   </div>
+
+  <ul *ngIf="citas$().length > 0" class="citas-lista">
+    <li *ngFor="let cita of citas$()" class="cita-item">
+      <strong>Paciente:</strong> {{ cita.pacienteNombre }}<br>
+      <strong>Fecha:</strong> {{ cita.fecha }}<br>
+      <strong>Hora:</strong> {{ cita.hora }}<br>
+      <strong>Estado:</strong> {{ cita.estado }}<br>
+
+      <button (click)="cambiarEstado(cita.id, 'confirmada')">✅ Confirmar</button>
+      <button (click)="cambiarEstado(cita.id, 'cancelada')">❌ Cancelar</button>
+    </li>
+  </ul>
 </div>

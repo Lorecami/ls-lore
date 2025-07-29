@@ -1,39 +1,34 @@
-<div class="agendar-container">
-  <h2>📅 Agendar Cita Médica</h2>
+<div class="agendar-panel">
+  <h2>🩺 Agendar una Cita Médica</h2>
 
-  <!-- Mensajes -->
-  <div *ngIf="mensaje" class="alert success">{{ mensaje }}</div>
-  <div *ngIf="error" class="alert error">{{ error }}</div>
-
-  <!-- Selección de doctor -->
-  <div *ngIf="!doctorSeleccionado" class="card">
-    <h3>👨‍⚕️ Selecciona un Doctor:</h3>
+  <div class="selector">
+    <label>Seleccione un doctor:</label>
     <select [(ngModel)]="doctorSeleccionado">
-      <option [ngValue]="null">-- Elige un doctor --</option>
-      <option *ngFor="let d of doctores$ | async" [ngValue]="d">
-        {{ d.name || 'Doctor(a)' }}
+      <option [ngValue]="null" disabled selected>Seleccione...</option>
+      <option *ngFor="let doc of doctores$ | async" [ngValue]="doc">
+        {{ doc['name'] }}
       </option>
     </select>
   </div>
 
-  <!-- Formulario de agendamiento -->
-  <div *ngIf="doctorSeleccionado" class="card">
-    <p><strong>Doctor seleccionado:</strong> {{ doctorSeleccionado.name }}</p>
+  <div *ngIf="doctorSeleccionado" class="formulario">
+    <h3>Doctor seleccionado: {{ doctorSeleccionado['name'] }}</h3>
 
-    <label>📆 Fecha:</label>
-    <input type="date" [(ngModel)]="fecha" />
-
-    <label>⏰ Hora:</label>
-    <select [(ngModel)]="hora">
-      <option [ngValue]="null">-- Selecciona hora --</option>
-      <option *ngFor="let h of horarios" [value]="h">{{ h }}</option>
-    </select>
-
-    <div class="actions">
-      <button class="btn primary" (click)="agendarTurno()">✅ Agendar</button>
-      <button class="btn secondary" (click)="cancelar()">Cancelar</button>
+    <div class="form-group">
+      <label for="fecha">Fecha</label>
+      <input type="date" [(ngModel)]="fecha" class="form-control" />
     </div>
+
+    <div class="form-group">
+      <label for="hora">Hora</label>
+      <select [(ngModel)]="hora" class="form-control">
+        <option [ngValue]="null" disabled selected>Seleccione hora</option>
+        <option *ngFor="let h of horarios" [value]="h">{{ h }}</option>
+      </select>
+    </div>
+
+    <button (click)="agendarCita()" class="btn-agendar">Agendar</button>
   </div>
+
+  <p class="mensaje">{{ mensaje }}</p>
 </div>
-
-

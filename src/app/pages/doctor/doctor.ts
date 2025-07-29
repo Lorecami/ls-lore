@@ -1,7 +1,8 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Firestore, collectionData, collection, query, where, updateDoc, doc } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
+import { Firestore, collection, collectionData, query, where, doc, updateDoc } from '@angular/fire/firestore';
+import { Auth, authState } from '@angular/fire/auth';
+import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-doctor',
@@ -12,23 +13,62 @@ import { Observable } from 'rxjs';
 })
 export class DoctorComponent implements OnInit {
   private firestore = inject(Firestore);
-  citas$: Observable<any[]> = new Observable();
+  private auth = inject(Auth);
 
-  userUid: string = localStorage.getItem('userUid') || '';
+  citas$ = signal<any[]>([]);
+  mensaje = signal('');
+  error = signal('');
+  loading = signal(true);
+  doctorDocId = '';
 
-  ngOnInit(): void {
-    const citasRef = collection(this.firestore, 'appointments');
-    const q = query(citasRef, where('doctorId', '==', this.userUid));
-    this.citas$ = collectionData(q, { idField: 'id' });
+  async ngOnInit() {
+    try {
+      const user = await firstValueFrom(authState(this.auth));
+      if (!user || !user.email) {
+        this.error.set('No hay sesión activa.');
+        this.loading.set(false);
+        return;
+      }
+
+      const usersRef = collection(this.firestore, 'users');
+      const q = query(usersRef, where('email', '==', user.email));
+      const data = await firstValueFrom(collectionData(q, { idField: 'id' }));
+
+      if (!data || data.length === 0) {
+        this.error.set('No se encontró el perfil del doctor.');
+        this.loading.set(false);
+        return;
+      }
+
+      this.doctorDocId = data[0]['id'];
+
+      const citasRef = collection(this.firestore, 'appointments');
+      const citasQuery = query(citasRef, where('doctorId', '==', this.doctorDocId));
+
+      collectionData(citasQuery, { idField: 'id' }).subscribe({
+        next: (citas) => {
+          this.citas$.set(citas);
+          this.loading.set(false);
+        },
+        error: (err) => {
+          this.error.set('Error al obtener citas: ' + err.message);
+          this.loading.set(false);
+        }
+      });
+
+    } catch (err: any) {
+      this.error.set('Error al inicializar: ' + err.message);
+      this.loading.set(false);
+    }
   }
 
-  async cambiarEstado(cita: any, nuevoEstado: string) {
+  async cambiarEstado(citaId: string, nuevoEstado: string) {
     try {
-      const citaRef = doc(this.firestore, 'appointments', cita.id);
+      const citaRef = doc(this.firestore, 'appointments', citaId);
       await updateDoc(citaRef, { estado: nuevoEstado });
-      alert('✅ Estado actualizado.');
-    } catch (err) {
-      alert('❌ Error al actualizar: ' + (err as any).message);
+      this.mensaje.set('✅ Estado actualizado.');
+    } catch (err: any) {
+      this.error.set('❌ Error al actualizar estado: ' + err.message);
     }
   }
 }

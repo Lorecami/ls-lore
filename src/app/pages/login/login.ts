@@ -33,7 +33,6 @@ export class LoginComponent {
       const res = await signInWithEmailAndPassword(this.auth, this.email, this.password);
       const user = res.user;
 
-      // Buscar usuario en Firestore por email (más confiable que por UID manual)
       const usersRef = collection(this.firestore, 'users');
       const q = query(usersRef, where('email', '==', user.email));
       const querySnapshot = await getDocs(q);
@@ -43,13 +42,16 @@ export class LoginComponent {
         return;
       }
 
-      const userDoc = querySnapshot.docs[0].data() as any;
+      const docSnap = querySnapshot.docs[0];
+      const userDoc = docSnap.data() as any;
 
       if (!userDoc || !userDoc.role) {
         this.error = '❌ No se pudo recuperar el rol del usuario.';
         return;
       }
 
+      // ✅ Guardar también el ID del documento (para usarlo como doctorId más adelante)
+      localStorage.setItem('userDocId', docSnap.id);
       localStorage.setItem('userUid', user.uid);
       localStorage.setItem('userEmail', user.email || '');
       localStorage.setItem('userRole', userDoc['role']);
