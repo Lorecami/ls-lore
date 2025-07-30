@@ -9,6 +9,26 @@
     margin-bottom: 1rem;
   }
 
+  .botones-reporte {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1rem;
+
+    button {
+      margin: 0 0.5rem;
+      background-color: #ba68c8;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      cursor: pointer;
+
+      &:hover {
+        background-color: #ab47bc;
+      }
+    }
+  }
+
   .card {
     background-color: #fff0f5;
     padding: 1rem;

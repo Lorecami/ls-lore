@@ -10,6 +10,25 @@
     margin-bottom: 1rem;
   }
 
+  .botones-reporte {
+    margin-bottom: 1rem;
+    display: flex;
+    gap: 1rem;
+
+    button {
+      background-color: #ba68c8;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      cursor: pointer;
+
+      &:hover {
+        background-color: #ab47bc;
+      }
+    }
+  }
+
   .admin-cita-item {
     margin-bottom: 1rem;
     padding: 1rem;

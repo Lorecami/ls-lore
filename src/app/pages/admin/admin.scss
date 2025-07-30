@@ -9,6 +9,24 @@ h2 {
   margin-bottom: 1rem;
 }
 
+.botones-reporte {
+  margin-bottom: 1rem;
+
+  button {
+    margin-right: 0.5rem;
+    background-color: #ba68c8;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #ab47bc;
+    }
+  }
+}
+
 .user-table {
   width: 100%;
   border-collapse: collapse;

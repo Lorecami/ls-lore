@@ -1,6 +1,11 @@
 <div class="admin-doctores">
   <h2>Gestión de Doctores</h2>
 
+  <div class="botones-reporte">
+    <button (click)="exportarPDF(doctores)">Exportar PDF</button>
+    <button (click)="exportarExcel(doctores)">Exportar Excel</button>
+  </div>
+
   <div *ngFor="let doctor of doctores$ | async" class="card">
     <div *ngIf="editMode && currentDoctor.id === doctor.id">
       <input [(ngModel)]="currentDoctor.name" placeholder="Nombre" />

@@ -1,6 +1,11 @@
 <div class="admin-citas-container">
   <h2>📋 Gestión de Citas (Admin)</h2>
 
+  <div class="botones-reporte">
+    <button (click)="exportarPDF(citas)">Exportar PDF</button>
+    <button (click)="exportarExcel(citas)">Exportar Excel</button>
+  </div>
+
   <ul *ngIf="citas$ | async as citas">
     <li *ngFor="let cita of citas" class="admin-cita-item">
       <strong>Doctor:</strong> {{ cita.doctorNombre || 'Sin nombre' }} <br />

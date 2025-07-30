@@ -1,6 +1,11 @@
 <div class="admin-container">
   <h2>Panel de Administración</h2>
 
+  <div class="botones-reporte">
+    <button (click)="exportarPDF(usuarios)">Exportar PDF</button>
+    <button (click)="exportarExcel(usuarios)">Exportar Excel</button>
+  </div>
+
   <table class="user-table">
     <thead>
       <tr>

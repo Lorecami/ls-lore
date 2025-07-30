@@ -31,15 +31,20 @@
     "@angular/platform-server": "^20.1.1",
     "@angular/router": "^20.1.1",
     "@angular/ssr": "^20.1.1",
+    "file-saver": "^2.0.5",
     "firebase": "^11.10.0",
+    "jspdf": "^3.0.1",
+    "jspdf-autotable": "^5.0.2",
     "primeicons": "^7.0.0",
     "primeng": "^20.0.0",
+    "xlsx": "^0.18.5",
     "zone.js": "^0.15.1"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^20.1.1",
     "@angular/cli": "^20.1.1",
     "@angular/compiler-cli": "^20.1.1",
+    "@types/file-saver": "^2.0.7",
     "@types/jasmine": "^5.1.8",
     "jasmine-core": "^5.8.0",
     "typescript": "^5.4.5"
